@@ -19,11 +19,14 @@
         }
 
         h1 {
+            position: absolute;
+            top: 10%;
             color: white;
             text-align: center;
             margin-bottom: 2em;
-            background-color: rgba(0, 0, 0, 0.7);  /* Fondo oscuro transparente para mejorar la legibilidad */
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
+            border: 3px solid white;
         }
 
         .btn {
@@ -32,14 +35,15 @@
             margin: 10px;
             color: white;
             background-color: #333;
-            border: none;
+            border: 3px solid white;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .btn:hover {
             background-color: #555;
+            transform: scale(1.1);
         }
 
         .btn:focus {

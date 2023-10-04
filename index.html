@@ -3,61 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Are you pure enough to enter to the club?</title>
+    <title>Domination Club Entrance</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <style>
         body {
             margin: 0;
             padding: 0;
-            height: 100vh; /* Asegurarnos de que el body ocupa toda la altura de la pantalla */
-            display: flex; /* Centrar la imagen */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #181818; /* Fondo oscuro */
-            font-family: 'Press Start 2P', cursive; /* Asegúrate de tener la fuente, o reemplaza por una que tengas */
+            background: url(doordomclub.jpg) center/cover no-repeat;
+            font-family: 'Press Start 2P', cursive;
         }
 
-        a {
-            position: relative; /* Necesario para posicionar el texto de manera absoluta */
-            display: inline-block;
-            cursor: pointer; /* Estilo de mano al pasar el ratón */
-            border: none; /* No mostrar bordes */
-            text-align: center; /* Alinear el texto al centro */
-            overflow: hidden; /* Ocultar cualquier cosa fuera de los límites del enlace */
-        }
-
-        a img {
-            max-width: 100%; /* Que la imagen no sobrepase el ancho de su contenedor */
-            height: auto; /* Mantener la relación de aspecto de la imagen */
-            transition: opacity 0.3s; /* Efecto de transición al pasar el ratón */
-        }
-
-        /* Estilo del texto que aparecerá */
-        a:hover img {
-            opacity: 0.4; /* Hacer la imagen semi-transparente al pasar el ratón */
-        }
-
-        a:hover .overlay-text {
-            opacity: 1; /* Mostrar el texto al pasar el ratón */
-        }
-
-        .overlay-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        h1 {
             color: white;
-            font-size: 1.5em;
-            opacity: 0;
-            transition: opacity 0.3s; /* Efecto de transición al pasar el ratón */
+            text-align: center;
+            margin-bottom: 2em;
+            background-color: rgba(0, 0, 0, 0.7);  /* Fondo oscuro transparente para mejorar la legibilidad */
+            padding: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            color: white;
+            background-color: #333;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        .btn:focus {
+            outline: none;
         }
     </style>
 </head>
 <body>
-    <!-- Enlace a main.html al hacer clic en la imagen -->
-    <a href="main.html">
-        <!-- Reemplaza 'ruta/a/tu/imagen.png' con la ruta a tu imagen de la puerta -->
-        <img src="doordomclub.jpg" alt="I want to be part of the club, whatever it takes...">
-        <div class="overlay-text">I want to be part of the club, whatever it takes...</div> <!-- Texto que aparecerá -->
-    </a>
+    <h1>Are you pure enough to enter to Domination Club?</h1>
+
+    <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
+    <a href="https://www.mylittlepony.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
 </body>
 </html>

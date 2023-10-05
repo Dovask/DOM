@@ -70,7 +70,7 @@
     </div>
 
     <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" loop></audio>
-    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Silenciar</button>
+    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Mute</button>
 
     <script>
         const audioElement = document.getElementById('backgroundMusic');
@@ -102,11 +102,11 @@
         muteButton.addEventListener('click', function() {
             if (audioElement.muted) {
                 audioElement.muted = false;
-                muteButton.textContent = 'Silenciar';
+                muteButton.textContent = 'Mute';
                 localStorage.setItem('muted', 'false');
             } else {
                 audioElement.muted = true;
-                muteButton.textContent = 'Reproducir';
+                muteButton.textContent = 'Music On';
                 localStorage.setItem('muted', 'true');
             }
         });

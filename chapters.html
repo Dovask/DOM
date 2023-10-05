@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapters - Domination Club</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #222;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .chapter-content {
+            display: none;
+        }
+        .btn {
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid white;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #555;
+        }
+        .text-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Select a Chapter</h1>
+
+<button class="btn" onclick="showChapter('chapter0')">Chapter 0</button>
+<!-- Puedes añadir más botones para más capítulos -->
+
+<div id="chapter0" class="chapter-content">
+    <h2>Chapter 0</h2>
+    <p id="chapter0-text-en" class="text-content" style="display: block;">Text chapter 0 in English</p>
+    <p id="chapter0-text-es" class="text-content">Texto del capítulo 0 en español</p>
+    <p id="chapter0-text-fr" class="text-content">Texte du chapitre 0 en français</p>
+    <p id="chapter0-text-it" class="text-content">Testo del capitolo 0 in italiano</p>
+    <p id="chapter0-text-cn" class="text-content">第0章的文本 (en chino mandarín)</p>
+
+    <button class="btn" onclick="changeLanguage('en')">English</button>
+    <button class="btn" onclick="changeLanguage('es')">Español</button>
+    <button class="btn" onclick="changeLanguage('fr')">Français</button>
+    <button class="btn" onclick="changeLanguage('it')">Italiano</button>
+    <button class="btn" onclick="changeLanguage('cn')">中文</button>
+</div>
+
+<script>
+    function showChapter(chapterId) {
+        const chapters = document.querySelectorAll('.chapter-content');
+        chapters.forEach(chapter => {
+            chapter.style.display = 'none';
+        });
+        document.getElementById(chapterId).style.display = 'block';
+    }
+
+    function changeLanguage(lang) {
+        const texts = document.querySelectorAll('.text-content');
+        texts.forEach(text => {
+            text.style.display = 'none';
+        });
+        document.querySelector(`[id$="-text-${lang}"]`).style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

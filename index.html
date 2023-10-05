@@ -58,3 +58,29 @@
     <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
 </body>
 </html>
+
+<audio id="backgroundMusic" src="lofidreamsdom.mp3" autoplay loop></audio>
+<button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Silenciar</button>
+
+<script>
+    const audioElement = document.getElementById('backgroundMusic');
+    const muteButton = document.getElementById('muteButton');
+
+    // Verificar el estado en localStorage al cargar la página
+    if (localStorage.getItem('muted') === 'true') {
+        audioElement.muted = true;
+        muteButton.textContent = 'Reproducir';
+    }
+
+    muteButton.addEventListener('click', function() {
+        if (audioElement.muted) {
+            audioElement.muted = false;
+            muteButton.textContent = 'Silenciar';
+            localStorage.setItem('muted', 'false');
+        } else {
+            audioElement.muted = true;
+            muteButton.textContent = 'Reproducir';
+            localStorage.setItem('muted', 'true');
+        }
+    });
+</script>

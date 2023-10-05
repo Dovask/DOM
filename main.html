@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOMINATION CLUB</title>
-    <!-- Integración de la fuente estilo 8-bits de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Estilos base */
         body {
-            font-family: 'Press Start 2P', cursive; /* Uso de la fuente 8-bits */
+            font-family: 'Press Start 2P', cursive;
             margin: 0;
             padding: 0;
-            background-color: #181818; /* Fondo oscuro */
-            color: #f5f5f5; /* Texto claro */
+            background-color: #181818;
+            color: #f5f5f5;
         }
 
-        /* Encabezado */
-        header {
+        #backButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
             background-color: #20232a;
-            padding: 20px 0;
-            text-align: center;
+            border: 2px solid #f5f5f5;
+            color: #f5f5f5;
+            cursor: pointer;
         }
 
         nav a {
             margin: 0 15px;
             color: #f5f5f5;
             text-decoration: none;
-            border: 2px solid transparent; /* Preparación para el efecto hover */
+            border-bottom: 2px solid transparent;
         }
 
         nav a:hover {
-            border-bottom: 2px solid #f5f5f5; /* Efecto subrayado al pasar el ratón */
+            border-bottom: 2px solid #f5f5f5;
         }
 
-        /* Contenedor principal */
         .container {
             max-width: 800px;
             margin: 50px auto;
@@ -43,14 +43,9 @@
 
         h1, h2 {
             color: #f5f5f5;
-            border-bottom: 1px dashed; /* Efecto subrayado punteado */
+            border-bottom: 1px dashed;
         }
 
-        /* Comentarios para sustitución de imágenes */
-        /* <img src="ruta/al/imagen.png" alt="Descripción"> */
-        /* Puedes reemplazar el código anterior con arte ASCII si lo prefieres */
-
-        /* Pie de página */
         footer {
             margin-top: 50px;
             text-align: center;
@@ -60,31 +55,29 @@
     </style>
 </head>
 <body>
+    <button id="backButton" onclick="window.location.href='main.html'">Volver</button>
+
     <header>
         <nav>
-            <!-- Puedes reemplazar estos enlaces con arte ASCII o imágenes PNG -->
-            <a href="#">DOMINATION CLUB</a>
-            <a href="#">ABOUT</a>
-            <div class="section">
-    <h2>Puzzles</h2>
-    <a href="puzzles.html" class="btn">Ir a los puzzles</a>
-</div>
-            <a href="#">ENTER TO THE CLUB</a>
+            <a href="#" id="chaptersLink">Capítulos</a>
+            <a href="#" id="puzzlesLink">Puzzles</a>
+            <a href="#" id="whoAreWeLink">Who are we?</a>
+            <a href="#" id="questsLink">Quests</a>
+            <a href="#" id="gamesLink">Juegos</a>
         </nav>
     </header>
 
     <div class="container">
-        <h1>Welcome to the club</h1>
-        <!-- Puedes reemplazar el siguiente texto con arte ASCII o imágenes PNG -->
+        <h1>Welcome to the Domination Club</h1>
         <p>Esta es una plantilla simple inspirada en el sitio web de BTC Machine. ¡Personalízala según tus necesidades!</p>
-
-        <h2>Otro Encabezado</h2>
-        <!-- Puedes reemplazar el siguiente texto con arte ASCII o imágenes PNG -->
-        <p>Más contenido se puede añadir aquí.</p>
     </div>
 
     <footer>
         © 2023 By Dovask. All rights reserved.
     </footer>
+    
+    <script>
+        // Aquí podemos agregar el código JS para manejar la funcionalidad SPA
+    </script>
 </body>
 </html>

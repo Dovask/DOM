@@ -52,9 +52,13 @@
 
         #muteButton {
             position: absolute;
-            top: calc(10% + 60px); /* 10% de la altura total más el alto del título más el padding del título */
+            top: calc(10% + 100px); /* 10% de la altura total más un poco más abajo del título */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(1);
+        }
+
+        #muteButton:hover {
+            transform: translateX(-50%) scale(1.1);
         }
     </style>
 </head>
@@ -63,7 +67,7 @@
     <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
 
     <h1>Are you pure enough to enter to Domination Club?</h1>
-    <button id="muteButton">Silenciar</button>
+    <button id="muteButton">MUSIC OFF</button>
 
     <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
     <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
@@ -77,23 +81,23 @@
 
         function startMusic() {
             audioElement.play();
-            overlay.style.display = 'none';  // Hacemos que la capa invisible desaparezca después de hacer clic
+            overlay.style.display = 'none';  // Hide the invisible layer after clicking
         }
 
-        // Verificar el estado en localStorage al cargar la página
+        // Check the state in localStorage when loading the page
         if (localStorage.getItem('muted') === 'true') {
             audioElement.muted = true;
-            muteButton.textContent = 'Reproducir';
+            muteButton.textContent = 'MUSIC ON';
         }
 
         muteButton.addEventListener('click', function() {
             if (audioElement.muted) {
                 audioElement.muted = false;
-                muteButton.textContent = 'Silenciar';
+                muteButton.textContent = 'MUSIC OFF';
                 localStorage.setItem('muted', 'false');
             } else {
                 audioElement.muted = true;
-                muteButton.textContent = 'Reproducir';
+                muteButton.textContent = 'MUSIC ON';
                 localStorage.setItem('muted', 'true');
             }
         });

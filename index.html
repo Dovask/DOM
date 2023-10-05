@@ -30,69 +30,83 @@
             border: 3px solid white;
         }
 
+        .btn-container {
+            position: absolute;
+            bottom: 10%;
+            display: flex;
+            gap: 10px;
+        }
+
         .btn {
             display: inline-block;
             padding: 10px 20px;
             margin: 10px;
             color: white;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
             border: 3px solid white;
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
+            font-size: 0.8em;
         }
 
         .btn:hover {
-            background-color: #555;
+            background-color: rgba(55, 55, 55, 0.8);
             transform: scale(1.1);
         }
 
         .btn:focus {
             outline: none;
         }
-
-        #startButton {
-            position: fixed;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
     </style>
 </head>
 
 <body>
     <h1>Are you pure enough to enter to Domination Club?</h1>
-    <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
-    <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
+
+    <div class="btn-container">
+        <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
+        <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
+    </div>
+
     <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" loop></audio>
-    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Stop</button>
-    <button id="startButton" onclick="startAudio()">Sound on</button>
+    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Silenciar</button>
 
     <script>
         const audioElement = document.getElementById('backgroundMusic');
         const muteButton = document.getElementById('muteButton');
-        const startButton = document.getElementById('startButton');
 
-        function startAudio() {
-            audioElement.play();
-            startButton.style.display = 'none';
-        }
+        // Inicia el audio de inmediato
+        audioElement.play().catch(() => {
+            // En caso de error, muestra el botón de inicio
+            const startButton = document.createElement('button');
+            startButton.textContent = 'Start';
+            startButton.style.position = 'fixed';
+            startButton.style.bottom = '50px';
+            startButton.style.left = '50%';
+            startButton.style.transform = 'translateX(-50%)';
+            startButton.style.zIndex = '1000';
+            startButton.onclick = () => {
+                audioElement.play();
+                startButton.style.display = 'none';
+            };
+            document.body.appendChild(startButton);
+        });
 
         // Verificar el estado en localStorage al cargar la página
         if (localStorage.getItem('muted') === 'true') {
             audioElement.muted = true;
-            muteButton.textContent = 'Play again';
+            muteButton.textContent = 'Reproducir';
         }
 
         muteButton.addEventListener('click', function() {
             if (audioElement.muted) {
                 audioElement.muted = false;
-                muteButton.textContent = 'Stop';
+                muteButton.textContent = 'Silenciar';
                 localStorage.setItem('muted', 'false');
             } else {
                 audioElement.muted = true;
-                muteButton.textContent = 'Play again';
+                muteButton.textContent = 'Reproducir';
                 localStorage.setItem('muted', 'true');
             }
         });

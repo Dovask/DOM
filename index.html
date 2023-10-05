@@ -30,12 +30,12 @@
         }
 
         .btn {
-            display: block;
+            display: inline-block;
             padding: 10px 20px;
             margin: 10px;
             color: white;
-            background-color: #2d2d2d;
-            border: 3px solid #5c5c5c;
+            background-color: #333;
+            border: 3px solid white;
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
@@ -49,46 +49,44 @@
         .btn:focus {
             outline: none;
         }
-
-        #muteControls {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-        }
     </style>
 </head>
 <body>
+    <!-- Esta es la capa invisible para iniciar la música -->
+    <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
+
     <h1>Are you pure enough to enter to Domination Club?</h1>
 
     <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
     <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
 
-    <div id="muteControls">
-        <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" autoplay loop></audio>
-        <button id="muteButton">Music Off</button>
-    </div>
+    <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" loop></audio>
+    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Silenciar</button>
 
     <script>
         const audioElement = document.getElementById('backgroundMusic');
         const muteButton = document.getElementById('muteButton');
+        const overlay = document.getElementById('playMusicOverlay');
+
+        function startMusic() {
+            audioElement.play();
+            overlay.style.display = 'none';  // Hacemos que la capa invisible desaparezca después de hacer clic
+        }
 
         // Verificar el estado en localStorage al cargar la página
         if (localStorage.getItem('muted') === 'true') {
             audioElement.muted = true;
-            muteButton.textContent = 'Music On';
+            muteButton.textContent = 'Music ON';
         }
 
         muteButton.addEventListener('click', function() {
             if (audioElement.muted) {
                 audioElement.muted = false;
-                muteButton.textContent = 'Music Off';
+                muteButton.textContent = 'Music OFF';
                 localStorage.setItem('muted', 'false');
             } else {
                 audioElement.muted = true;
-                muteButton.textContent = 'Music On';
+                muteButton.textContent = 'Music ON';
                 localStorage.setItem('muted', 'true');
             }
         });

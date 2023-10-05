@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,79 +29,62 @@
             border: 3px solid white;
         }
 
-        .btn-container {
-            position: absolute;
-            bottom: 10%;
-            display: flex;
-            gap: 10px;
-        }
-
         .btn {
-            display: inline-block;
+            display: block;
             padding: 10px 20px;
             margin: 10px;
             color: white;
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 3px solid white;
+            background-color: #2d2d2d;
+            border: 3px solid #5c5c5c;
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
-            font-size: 0.8em;
         }
 
         .btn:hover {
-            background-color: rgba(55, 55, 55, 0.8);
+            background-color: #555;
             transform: scale(1.1);
         }
 
         .btn:focus {
             outline: none;
         }
+
+        #muteControls {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
     </style>
 </head>
-
 <body>
     <h1>Are you pure enough to enter to Domination Club?</h1>
 
-    <div class="btn-container">
-        <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
-        <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
-    </div>
+    <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
+    <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
 
-    <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" loop></audio>
-    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Mute</button>
+    <div id="muteControls">
+        <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" autoplay loop></audio>
+        <button id="muteButton">Music Off</button>
+    </div>
 
     <script>
         const audioElement = document.getElementById('backgroundMusic');
         const muteButton = document.getElementById('muteButton');
 
-        // Inicia el audio de inmediato
-        audioElement.play().catch(() => {
-            // En caso de error, muestra el botón de inicio
-            const startButton = document.createElement('button');
-            startButton.textContent = 'Start';
-            startButton.style.position = 'fixed';
-            startButton.style.bottom = '50px';
-            startButton.style.left = '50%';
-            startButton.style.transform = 'translateX(-50%)';
-            startButton.style.zIndex = '1000';
-            startButton.onclick = () => {
-                audioElement.play();
-                startButton.style.display = 'none';
-            };
-            document.body.appendChild(startButton);
-        });
-
         // Verificar el estado en localStorage al cargar la página
         if (localStorage.getItem('muted') === 'true') {
             audioElement.muted = true;
-            muteButton.textContent = 'Reproducir';
+            muteButton.textContent = 'Music On';
         }
 
         muteButton.addEventListener('click', function() {
             if (audioElement.muted) {
                 audioElement.muted = false;
-                muteButton.textContent = 'Mute';
+                muteButton.textContent = 'Music Off';
                 localStorage.setItem('muted', 'false');
             } else {
                 audioElement.muted = true;
@@ -112,5 +94,4 @@
         });
     </script>
 </body>
-
 </html>

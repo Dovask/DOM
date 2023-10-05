@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +17,23 @@
 
         #backButton {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             background-color: #20232a;
-            border: 2px solid #f5f5f5;
-            color: #f5f5f5;
+            border: none;
             cursor: pointer;
+            width: 50px; /* Ajusta el tamaño según prefieras */
+            height: 50px; /* Ajusta el tamaño según prefieras */
+        }
+
+        #backButton img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        nav {
+            text-align: center; /* Centramos los elementos del nav */
+            padding: 20px 0; 
         }
 
         nav a {
@@ -54,30 +66,34 @@
         }
     </style>
 </head>
+
 <body>
-    <button id="backButton" onclick="window.location.href='main.html'">Volver</button>
+    <button id="backButton">
+        <img src="path_to_your_image.png" alt="Back"> <!-- Coloca aquí el path de tu imagen -->
+    </button>
 
     <header>
         <nav>
-            <a href="#" id="chaptersLink">Capítulos</a>
+            <a href="#" id="chaptersLink">Chapters</a>
             <a href="#" id="puzzlesLink">Puzzles</a>
             <a href="#" id="whoAreWeLink">Who are we?</a>
             <a href="#" id="questsLink">Quests</a>
-            <a href="#" id="gamesLink">Juegos</a>
+            <a href="#" id="gamesLink">Gaming</a>
         </nav>
     </header>
 
     <div class="container">
         <h1>Welcome to the Domination Club</h1>
-        <p>Esta es una plantilla simple inspirada en el sitio web de BTC Machine. ¡Personalízala según tus necesidades!</p>
+        <p>Something is comming... but don't tell anyone</p>
     </div>
 
     <footer>
         © 2023 By Dovask. All rights reserved.
     </footer>
-    
+
     <script>
         // Aquí podemos agregar el código JS para manejar la funcionalidad SPA
     </script>
 </body>
+
 </html>

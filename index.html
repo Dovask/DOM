@@ -23,13 +23,13 @@
             top: 10%;
             color: white;
             text-align: center;
-            margin-bottom: 2em;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border: 3px solid white;
         }
 
-        .btn {
+        .btn, #muteButton {
+            font-family: 'Press Start 2P', cursive;
             display: inline-block;
             padding: 10px 20px;
             margin: 10px;
@@ -41,13 +41,20 @@
             transition: background-color 0.3s, transform 0.3s;
         }
 
-        .btn:hover {
+        .btn:hover, #muteButton:hover {
             background-color: #555;
             transform: scale(1.1);
         }
 
-        .btn:focus {
+        .btn:focus, #muteButton:focus {
             outline: none;
+        }
+
+        #muteButton {
+            position: absolute;
+            top: calc(10% + 60px); /* 10% de la altura total más el alto del título más el padding del título */
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
@@ -56,12 +63,12 @@
     <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
 
     <h1>Are you pure enough to enter to Domination Club?</h1>
+    <button id="muteButton">Silenciar</button>
 
     <a href="main.html" class="btn">I want to be part of the Club, whatever it takes...</a>
     <a href="https://shopping.mattel.com/" target="_blank" class="btn">I'm scared of dark places, please take me to a secure place.</a>
 
     <audio id="backgroundMusic" src="https://github.com/Dovask/DOM/raw/main/lofidreamsdom.mp3" loop></audio>
-    <button id="muteButton" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">Music OFF</button>
 
     <script>
         const audioElement = document.getElementById('backgroundMusic');
@@ -76,17 +83,17 @@
         // Verificar el estado en localStorage al cargar la página
         if (localStorage.getItem('muted') === 'true') {
             audioElement.muted = true;
-            muteButton.textContent = 'Music ON';
+            muteButton.textContent = 'Reproducir';
         }
 
         muteButton.addEventListener('click', function() {
             if (audioElement.muted) {
                 audioElement.muted = false;
-                muteButton.textContent = 'Music OFF';
+                muteButton.textContent = 'Silenciar';
                 localStorage.setItem('muted', 'false');
             } else {
                 audioElement.muted = true;
-                muteButton.textContent = 'Music ON';
+                muteButton.textContent = 'Reproducir';
                 localStorage.setItem('muted', 'true');
             }
         });

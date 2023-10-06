@@ -1,56 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapters | Domination Club</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <style>
-        /* [Estilos aquí] */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #111;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        nav {
+            position: absolute;
+            top: 10%;
+            display: flex;
+            gap: 20px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border: 3px solid white;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        a:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        #chapterContent {
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border: 3px solid white;
+            margin-bottom: 2em;
+        }
+
+        #languageButtons {
+            position: absolute;
+            bottom: 10%;
+            display: flex;
+            gap: 20px;
+        }
     </style>
 </head>
-
 <body>
+    <!-- Capa invisible para la música -->
+    <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
 
+    <!-- Navegación de capítulos -->
     <nav>
-        <!-- Todos los capítulos del 0 al 10 -->
         <a href="#" onclick="showChapter(0); return false;">Chapter 0</a>
-        <a href="#" onclick="showChapter(1); return false;">Chapter 1</a>
-        <a href="#" onclick="showChapter(2); return false;">Chapter 2</a>
-        <a href="#" onclick="showChapter(3); return false;">Chapter 3</a>
-        <a href="#" onclick="showChapter(4); return false;">Chapter 4</a>
-        <a href="#" onclick="showChapter(5); return false;">Chapter 5</a>
-        <a href="#" onclick="showChapter(6); return false;">Chapter 6</a>
-        <a href="#" onclick="showChapter(7); return false;">Chapter 7</a>
-        <a href="#" onclick="showChapter(8); return false;">Chapter 8</a>
-        <a href="#" onclick="showChapter(9); return false;">Chapter 9</a>
+        <!-- ... otros capítulos ... -->
         <a href="#" onclick="showChapter(10); return false;">Chapter 10</a>
     </nav>
 
-    <!-- Resto del contenido -->
+    <!-- Contenido del capítulo -->
+    <div id="chapterContent">Select a chapter to display its content.</div>
+
+    <!-- Botones de traducción -->
+    <div id="languageButtons">
+        <a href="#" onclick="changeLanguage('en'); return false;">EN</a>
+        <a href="#" onclick="changeLanguage('es'); return false;">ES</a>
+        <a href="#" onclick="changeLanguage('fr'); return false;">FR</a>
+        <a href="#" onclick="changeLanguage('it'); return false;">IT</a>
+        <a href="#" onclick="changeLanguage('zh'); return false;">中文</a>
+    </div>
+
+    <!-- Audio y control de música -->
+    <audio id="backgroundMusic" src="path_to_your_music.mp3" loop></audio>
+    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Mute</button>
 
     <script>
-        // [Contenido JS aquí]
+        const chapterText = document.getElementById('chapterContent');
+        const audioElement = document.getElementById('backgroundMusic');
+        const muteButton = document.getElementById('muteButton');
+        const overlay = document.getElementById('playMusicOverlay');
+
+        function startMusic() {
+            audioElement.play();
+            overlay.style.display = 'none';  // Hide the invisible layer after clicking
+        }
 
         function showChapter(chapterNumber) {
-            fetch(`chapter${chapterNumber}.txt`)
-                .then(response => response.text())
-                .then(text => {
-                    chapterText.textContent = text;
-                });
+            // Assuming you have a default text for each chapter
+            switch (chapterNumber) {
+                case 0:
+                    chapterText.textContent = "Chapter 0: Coming Soon";
+                    break;
+                // ... other chapters ...
+                case 10:
+                    chapterText.textContent = "Chapter 10: Coming Soon";
+                    break;
+                default:
+                    chapterText.textContent = "Coming Soon";
+                    break;
+            }
         }
 
         function changeLanguage(lang) {
-            const text = chapterText.textContent;
-            // API nativa de traducción de los navegadores modernos
-            const translatedText = new Intl.DisplayNames([lang], {type: 'region'});
-            chapterText.textContent = translatedText.of(text);
+            // Fetch translation from your server or use an API here
+            // For now, it will just change the chapter text
+            switch (lang) {
+                case 'en':
+                    chapterText.textContent += " (English Version)";
+                    break;
+                case 'es':
+                    chapterText.textContent += " (Versión en Español)";
+                    break;
+                // ... other languages ...
+            }
         }
 
-        // [Resto del contenido JS]
+        muteButton.addEventListener('click', function() {
+            if (audioElement.muted) {
+                audioElement.muted = false;
+                muteButton.textContent = 'Mute';
+            } else {
+                audioElement.muted = true;
+                muteButton.textContent = 'Play';
+            }
+        });
     </script>
-
 </body>
-
 </html>

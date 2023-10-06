@@ -1,126 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domination Club - Chapters</title>
+    <title>Chapters | Domination Club</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <style>
         body {
             font-family: 'Press Start 2P', cursive;
-            margin: 0;
-            padding: 0;
             background-color: #181818;
             color: #f5f5f5;
             text-align: center;
         }
 
         nav {
-            margin-top: 2em;
+            margin-top: 30px;
         }
 
         nav a {
-            text-decoration: none;
-            color: white;
             margin: 0 15px;
+            color: #f5f5f5;
+            text-decoration: none;
+            border: 2px solid transparent;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            border-bottom: 2px solid #f5f5f5;
         }
 
         #chapterContent {
-            margin-top: 50px;
-            font-size: 1.5em;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            color: white;
-            background-color: #333;
-            border: 3px solid white;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #555;
-            transform: scale(1.1);
-        }
-
-        .btn:focus {
-            outline: none;
-        }
-
-        .language-buttons {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        #muteButton {
+        .langBtns {
             position: fixed;
             bottom: 10px;
             right: 10px;
-            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .langBtns button {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .langBtns button:hover {
+            background-color: #555;
         }
     </style>
 </head>
+
 <body>
-    <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
 
     <nav>
         <a href="#" onclick="showChapter(0); return false;">Chapter 0</a>
-        <!-- ... y así sucesivamente hasta el capítulo 10 -->
+        <a href="#" onclick="showChapter(1); return false;">Chapter 1</a>
+        <!--... y así sucesivamente hasta el 10 ...-->
+        <a href="#" onclick="showChapter(10); return false;">Chapter 10</a>
     </nav>
 
-    <div id="chapterContent">Select a chapter above to read its content.</div>
-
-    <!-- Botones de traducción de idioma -->
-    <div class="language-buttons">
-        <button class="btn">EN</button>
-        <button class="btn">ES</button>
-        <button class="btn">FR</button>
-        <button class="btn">IT</button>
-        <button class="btn">CN</button>
+    <div id="chapterContent">
+        <p id="chapterText">Chapter 0: Coming Soon</p>
     </div>
 
-    <!-- Audio y botón de silencio -->
-    <audio id="backgroundMusic" src="URL_A_TU_MUSICA.mp3" loop></audio>
-    <button id="muteButton" class="btn">MUSIC ON</button>
+    <div class="langBtns">
+        <button onclick="changeLanguage('en')">EN</button>
+        <button onclick="changeLanguage('es')">ES</button>
+        <button onclick="changeLanguage('fr')">FR</button>
+        <button onclick="changeLanguage('it')">IT</button>
+        <button onclick="changeLanguage('cn')">CN</button>
+    </div>
+
+    <audio id="backgroundMusic" src="path_to_your_music_file.mp3" loop></audio>
+    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">MUSIC OFF</button>
 
     <script>
-        const audioElement = document.getElementById('backgroundMusic');
-        const muteButton = document.getElementById('muteButton');
-        const overlay = document.getElementById('playMusicOverlay');
-        const chapterContent = document.getElementById('chapterContent');
-
-        function startMusic() {
-            audioElement.play();
-            overlay.style.display = 'none';  
-        }
+        const chapterText = document.getElementById('chapterText');
 
         function showChapter(chapterNumber) {
-            const chapters = [
-                "Coming Soon", // Chapter 0
-                "Coming Soon", // Chapter 1
-                //... etc.
-            ];
-            chapterContent.textContent = `Chapter ${chapterNumber}: ${chapters[chapterNumber]}`;
+            chapterText.textContent = `Chapter ${chapterNumber}: Coming Soon`;
         }
 
+        function changeLanguage(lang) {
+            switch (lang) {
+                case 'en':
+                    chapterText.textContent = "Chapter content in English"; // Replace with actual English content
+                    break;
+                case 'es':
+                    chapterText.textContent = "Contenido del capítulo en español"; // Replace with actual Spanish content
+                    break;
+                // ... And so on for other languages ...
+                default:
+                    chapterText.textContent = "Chapter content in English"; // Default to English
+            }
+        }
+
+        const audioElement = document.getElementById('backgroundMusic');
+        const muteButton = document.getElementById('muteButton');
+
         muteButton.addEventListener('click', function() {
-            if (audioElement.muted) {
-                audioElement.muted = false;
+            if (audioElement.paused) {
+                audioElement.play();
                 muteButton.textContent = 'MUSIC ON';
             } else {
-                audioElement.muted = true;
+                audioElement.pause();
                 muteButton.textContent = 'MUSIC OFF';
             }
         });
     </script>
+
 </body>
+
 </html>

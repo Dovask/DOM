@@ -7,16 +7,62 @@
     <title>Chapters</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <style>
-        /* Estilos aquí, similar a lo que te proporcioné anteriormente. */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: url(doordomclub.jpg) center/cover no-repeat;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        nav {
+            position: absolute;
+            top: 10%;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a, #languages button {
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border: 3px solid white;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover, #languages button:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        #chapterContent {
+            margin: 20px 0;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border: 3px solid white;
+        }
+
+        #languages {
+            position: absolute;
+            bottom: 10%;
+            display: flex;
+            gap: 20px;
+        }
     </style>
 </head>
 
 <body>
-
 <nav>
-    <!-- Repite esto para cada capítulo -->
     <a href="#" onclick="loadChapter(0)">Chapter 0</a>
-    <!-- ... -->
+    <a href="#" onclick="loadChapter(1)">Chapter 1</a>
+    <!-- ... Agrega hasta Chapter 10 -->
 </nav>
 
 <div id="chapterContent">Coming soon</div>
@@ -35,7 +81,8 @@
     let currentChapter = 0;
     const chapterData = {
         0: 'Coming soon',
-        // ... Agrega otros capítulos aquí
+        1: 'Coming soon',
+        // ... Agrega otros capítulos aquí hasta el 10
     };
 
     function loadChapter(chapter) {
@@ -44,7 +91,7 @@
     }
 
     function translateContent(targetLang) {
-        if(currentLanguage === targetLang) return;
+        if (currentLanguage === targetLang) return;
 
         const apiUrl = 'https://libretranslate.com/translate';
         fetch(apiUrl, {
@@ -54,7 +101,7 @@
                 source: 'en',
                 target: targetLang
             }),
-            headers: {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         }).then(response => response.json()).then(data => {
             document.getElementById('chapterContent').innerText = data.translatedText;
         }).catch(error => {

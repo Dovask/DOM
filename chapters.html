@@ -4,128 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapters | Domination Club</title>
+    <title>Chapters</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: url(doordomclub.jpg) center/cover no-repeat;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        nav {
-            position: absolute;
-            top: 5%;
-            text-align: center;
-            width: 100%;
-        }
-
-        nav a {
-            margin: 0 10px;
-            color: white;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        #chapterContent {
-            color: white;
-            margin-top: 2em;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border: 3px solid white;
-        }
-
-        #languageButtons {
-            position: absolute;
-            bottom: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        #languageButtons a {
-            margin: 0 5px;
-            color: white;
-            text-decoration: none;
-        }
-
-        #languageButtons a:hover {
-            text-decoration: underline;
-        }
-
-        #muteButton {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-        }
+        /* Estilos aquí, similar a lo que te proporcioné anteriormente. */
     </style>
 </head>
 
 <body>
-    <!-- Navegación de capítulos -->
-    <nav>
-        <a href="#" onclick="displayChapter(0)">Chapter 0</a>
-        <a href="#" onclick="displayChapter(1)">Chapter 1</a>
-        <!--... Repite esto hasta Chapter 10 ...-->
-        <a href="#" onclick="displayChapter(10)">Chapter 10</a>
-    </nav>
 
-    <!-- Contenido del capítulo -->
-    <div id="chapterContent">Select a chapter to display its content.</div>
+<nav>
+    <!-- Repite esto para cada capítulo -->
+    <a href="#" onclick="loadChapter(0)">Chapter 0</a>
+    <!-- ... -->
+</nav>
 
-    <!-- Botones de traducción -->
-    <div id="languageButtons">
-        <a href="#" onclick="translateContent('en')">EN</a>
-        <a href="#" onclick="translateContent('es')">ES</a>
-        <a href="#" onclick="translateContent('fr')">FR</a>
-        <a href="#" onclick="translateContent('it')">IT</a>
-        <a href="#" onclick="translateContent('zh')">CN</a>
-    </div>
+<div id="chapterContent">Coming soon</div>
 
-    <!-- Música y controles -->
-    <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
-    <audio id="backgroundMusic" src="URL_A_LA_MUSICA" loop></audio>
-    <button id="muteButton" onclick="toggleMute()">Mute</button>
+<div id="languages">
+    <button onclick="translateContent('en')">EN</button>
+    <button onclick="translateContent('es')">ES</button>
+    <!-- Agrega botones para otros idiomas aquí -->
+</div>
 
-    <script>
-        let currentChapter = -1;
+<audio id="backgroundMusic" src="URL_DE_TU_MUSICA" loop></audio>
+<button id="muteButton" onclick="toggleMute()">Mute</button>
 
-        function displayChapter(chapterNumber) {
-            currentChapter = chapterNumber;
-            document.getElementById('chapterContent').innerText = `Chapter ${chapterNumber}: Coming Soon`;
-        }
+<script>
+    let currentLanguage = 'en';
+    let currentChapter = 0;
+    const chapterData = {
+        0: 'Coming soon',
+        // ... Agrega otros capítulos aquí
+    };
 
-        async function translateContent(lang) {
-            if (currentChapter === -1) return;
+    function loadChapter(chapter) {
+        currentChapter = chapter;
+        document.getElementById('chapterContent').innerText = chapterData[chapter];
+    }
 
-            let textToTranslate = `Chapter ${currentChapter}: Coming Soon`;
-            // Aquí podrías llamar a un servicio de traducción en tiempo real. Por ejemplo, Google Translate API. 
-            // Sin embargo, estos servicios requieren una clave API y usualmente no son gratuitos.
-            // Como no especificaste uno, haré una traducción ficticia por ahora.
-            let translatedText = textToTranslate + ` (Translated to ${lang})`;
+    function translateContent(targetLang) {
+        if(currentLanguage === targetLang) return;
 
-            document.getElementById('chapterContent').innerText = translatedText;
-        }
+        const apiUrl = 'https://libretranslate.com/translate';
+        fetch(apiUrl, {
+            method: 'POST',
+            body: JSON.stringify({
+                q: chapterData[currentChapter],
+                source: 'en',
+                target: targetLang
+            }),
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.json()).then(data => {
+            document.getElementById('chapterContent').innerText = data.translatedText;
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+        currentLanguage = targetLang;
+    }
 
-        function startMusic() {
-            document.getElementById('backgroundMusic').play();
-            document.getElementById('playMusicOverlay').style.display = 'none';
-        }
-
-        function toggleMute() {
-            const audio = document.getElementById('backgroundMusic');
-            audio.muted = !audio.muted;
-            document.getElementById('muteButton').innerText = audio.muted ? 'Unmute' : 'Mute';
-        }
-    </script>
+    function toggleMute() {
+        const audio = document.getElementById('backgroundMusic');
+        audio.muted = !audio.muted;
+    }
+</script>
 </body>
-
 </html>

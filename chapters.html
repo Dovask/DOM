@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,55 +15,62 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #111;
+            background: url(doordomclub.jpg) center/cover no-repeat;
             font-family: 'Press Start 2P', cursive;
         }
 
         nav {
             position: absolute;
             top: 10%;
-            display: flex;
-            gap: 20px;
+            text-align: center;
+            width: 100%;
         }
 
-        a {
+        nav a {
+            margin: 0 10px;
             color: white;
             text-decoration: none;
-            padding: 10px;
-            border: 3px solid white;
-            background-color: rgba(0, 0, 0, 0.7);
         }
 
-        a:hover {
-            background-color: #555;
-            transform: scale(1.1);
+        nav a:hover {
+            text-decoration: underline;
         }
 
         #chapterContent {
-            text-align: center;
             color: white;
+            margin-top: 2em;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border: 3px solid white;
-            margin-bottom: 2em;
         }
 
         #languageButtons {
             position: absolute;
             bottom: 10%;
-            display: flex;
-            gap: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
+
+        #languageButtons a {
+            margin: 0 5px;
+            color: white;
+            text-decoration: none;
+        }
+
+        #languageButtons a:hover {
+            text-decoration: underline;
+        }
+
+        /* ... Estilos para los botones de música y demás ... */
     </style>
 </head>
-<body>
-    <!-- Capa invisible para la música -->
-    <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
 
+<body>
     <!-- Navegación de capítulos -->
     <nav>
         <a href="#" onclick="showChapter(0); return false;">Chapter 0</a>
-        <!-- ... otros capítulos ... -->
+        <a href="#" onclick="showChapter(1); return false;">Chapter 1</a>
+        <!--... Repite esto hasta Chapter 10 ...-->
         <a href="#" onclick="showChapter(10); return false;">Chapter 10</a>
     </nav>
 
@@ -75,63 +83,34 @@
         <a href="#" onclick="changeLanguage('es'); return false;">ES</a>
         <a href="#" onclick="changeLanguage('fr'); return false;">FR</a>
         <a href="#" onclick="changeLanguage('it'); return false;">IT</a>
-        <a href="#" onclick="changeLanguage('zh'); return false;">中文</a>
+        <a href="#" onclick="changeLanguage('cn'); return false;">CN</a>
     </div>
 
-    <!-- Audio y control de música -->
-    <audio id="backgroundMusic" src="path_to_your_music.mp3" loop></audio>
-    <button id="muteButton" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">Mute</button>
+    <!-- ... Código para la música, el botón de mute y el overlay ... -->
 
     <script>
         const chapterText = document.getElementById('chapterContent');
-        const audioElement = document.getElementById('backgroundMusic');
-        const muteButton = document.getElementById('muteButton');
-        const overlay = document.getElementById('playMusicOverlay');
-
-        function startMusic() {
-            audioElement.play();
-            overlay.style.display = 'none';  // Hide the invisible layer after clicking
-        }
 
         function showChapter(chapterNumber) {
-            // Assuming you have a default text for each chapter
-            switch (chapterNumber) {
-                case 0:
-                    chapterText.textContent = "Chapter 0: Coming Soon";
-                    break;
-                // ... other chapters ...
-                case 10:
-                    chapterText.textContent = "Chapter 10: Coming Soon";
-                    break;
-                default:
-                    chapterText.textContent = "Coming Soon";
-                    break;
-            }
+            chapterText.textContent = `Chapter ${chapterNumber}: Coming Soon`;
         }
 
         function changeLanguage(lang) {
-            // Fetch translation from your server or use an API here
-            // For now, it will just change the chapter text
-            switch (lang) {
-                case 'en':
-                    chapterText.textContent += " (English Version)";
-                    break;
-                case 'es':
-                    chapterText.textContent += " (Versión en Español)";
-                    break;
-                // ... other languages ...
+            if (lang === 'en') {
+                chapterText.textContent += " (English Version)";
+            } else if (lang === 'es') {
+                chapterText.textContent += " (Versión en Español)";
+            } else if (lang === 'fr') {
+                chapterText.textContent += " (Version Française)";
+            } else if (lang === 'it') {
+                chapterText.textContent += " (Versione Italiana)";
+            } else if (lang === 'cn') {
+                chapterText.textContent += " (中文版)";
             }
         }
 
-        muteButton.addEventListener('click', function() {
-            if (audioElement.muted) {
-                audioElement.muted = false;
-                muteButton.textContent = 'Mute';
-            } else {
-                audioElement.muted = true;
-                muteButton.textContent = 'Play';
-            }
-        });
+        // ... Código para la música y demás ...
     </script>
 </body>
+
 </html>

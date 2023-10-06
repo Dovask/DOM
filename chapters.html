@@ -15,12 +15,23 @@
             text-align: center;
         }
 
-        h1 {
+        nav {
             margin-top: 2em;
         }
 
-        .chapter {
-            margin: 20px 0;
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #chapterContent {
+            margin-top: 50px;
+            font-size: 1.5em;
         }
 
         .btn {
@@ -31,7 +42,6 @@
             background-color: #333;
             border: 3px solid white;
             cursor: pointer;
-            text-decoration: none;
             transition: background-color 0.3s, transform 0.3s;
         }
 
@@ -47,7 +57,8 @@
         .language-buttons {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         #muteButton {
@@ -61,16 +72,12 @@
 <body>
     <div id="playMusicOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000;" onclick="startMusic()"></div>
 
-    <h1>Chapters</h1>
+    <nav>
+        <a href="#" onclick="showChapter(0); return false;">Chapter 0</a>
+        <!-- ... y así sucesivamente hasta el capítulo 10 -->
+    </nav>
 
-    <!-- Capítulos -->
-    <div class="chapter" id="chapter0">
-        Chapter 0: <span>Coming Soon</span>
-    </div>
-    <div class="chapter" id="chapter1">
-        Chapter 1: <span>Coming Soon</span>
-    </div>
-    <!-- ... y así sucesivamente hasta el capítulo 10 -->
+    <div id="chapterContent">Select a chapter above to read its content.</div>
 
     <!-- Botones de traducción de idioma -->
     <div class="language-buttons">
@@ -89,10 +96,20 @@
         const audioElement = document.getElementById('backgroundMusic');
         const muteButton = document.getElementById('muteButton');
         const overlay = document.getElementById('playMusicOverlay');
+        const chapterContent = document.getElementById('chapterContent');
 
         function startMusic() {
             audioElement.play();
             overlay.style.display = 'none';  
+        }
+
+        function showChapter(chapterNumber) {
+            const chapters = [
+                "Coming Soon", // Chapter 0
+                "Coming Soon", // Chapter 1
+                //... etc.
+            ];
+            chapterContent.textContent = `Chapter ${chapterNumber}: ${chapters[chapterNumber]}`;
         }
 
         muteButton.addEventListener('click', function() {

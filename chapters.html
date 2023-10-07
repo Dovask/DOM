@@ -15,7 +15,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: url(doordomclub.jpg) center/cover no-repeat;
+            background-color: black;
             font-family: 'Press Start 2P', cursive;
         }
 
@@ -62,7 +62,9 @@
 <nav>
     <a href="#" onclick="loadChapter(0)">Chapter 0</a>
     <a href="#" onclick="loadChapter(1)">Chapter 1</a>
-    <!-- ... Agrega hasta Chapter 10 -->
+    <a href="#" onclick="loadChapter(2)">Chapter 2</a>
+    <!-- ... Agrega los capítulos hasta el 10 -->
+    <a href="#" onclick="loadChapter(10)">Chapter 10</a>
 </nav>
 
 <div id="chapterContent">Coming soon</div>
@@ -70,7 +72,9 @@
 <div id="languages">
     <button onclick="translateContent('en')">EN</button>
     <button onclick="translateContent('es')">ES</button>
-    <!-- Agrega botones para otros idiomas aquí -->
+    <button onclick="translateContent('fr')">FR</button>
+    <button onclick="translateContent('it')">IT</button>
+    <button onclick="translateContent('zh')">ZH</button>
 </div>
 
 <audio id="backgroundMusic" src="URL_DE_TU_MUSICA" loop></audio>
@@ -78,26 +82,29 @@
 
 <script>
     let currentLanguage = 'en';
-    let currentChapter = 0;
-    const chapterData = {
+    const chapters = {
         0: 'Coming soon',
         1: 'Coming soon',
+        2: 'Coming soon',
         // ... Agrega otros capítulos aquí hasta el 10
+        10: 'Coming soon'
     };
 
     function loadChapter(chapter) {
-        currentChapter = chapter;
-        document.getElementById('chapterContent').innerText = chapterData[chapter];
+        document.getElementById('chapterContent').innerText = chapters[chapter];
+        translateContent(currentLanguage); // Actualizar contenido al idioma actual
     }
 
     function translateContent(targetLang) {
         if (currentLanguage === targetLang) return;
 
         const apiUrl = 'https://libretranslate.com/translate';
+        const content = document.getElementById('chapterContent').innerText;
+        
         fetch(apiUrl, {
             method: 'POST',
             body: JSON.stringify({
-                q: chapterData[currentChapter],
+                q: content,
                 source: 'en',
                 target: targetLang
             }),
@@ -114,6 +121,9 @@
         const audio = document.getElementById('backgroundMusic');
         audio.muted = !audio.muted;
     }
+
+    // Cargar por defecto el capítulo 0 al abrir la página
+    window.onload = () => loadChapter(0);
 </script>
 </body>
 </html>

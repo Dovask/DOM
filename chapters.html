@@ -63,7 +63,13 @@
     <a href="#" onclick="loadChapter(0)">Chapter 0</a>
     <a href="#" onclick="loadChapter(1)">Chapter 1</a>
     <a href="#" onclick="loadChapter(2)">Chapter 2</a>
-    <!-- ... Agrega los capítulos hasta el 10 -->
+    <a href="#" onclick="loadChapter(3)">Chapter 3</a>
+    <a href="#" onclick="loadChapter(4)">Chapter 4</a>
+    <a href="#" onclick="loadChapter(5)">Chapter 5</a>
+    <a href="#" onclick="loadChapter(6)">Chapter 6</a>
+    <a href="#" onclick="loadChapter(7)">Chapter 7</a>
+    <a href="#" onclick="loadChapter(8)">Chapter 8</a>
+    <a href="#" onclick="loadChapter(9)">Chapter 9</a>
     <a href="#" onclick="loadChapter(10)">Chapter 10</a>
 </nav>
 
@@ -86,7 +92,13 @@
         0: 'Coming soon',
         1: 'Coming soon',
         2: 'Coming soon',
-        // ... Agrega otros capítulos aquí hasta el 10
+        3: 'Coming soon',
+        4: 'Coming soon',
+        5: 'Coming soon',
+        6: 'Coming soon',
+        7: 'Coming soon',
+        8: 'Coming soon',
+        9: 'Coming soon',
         10: 'Coming soon'
     };
 
@@ -101,20 +113,22 @@
         const apiUrl = 'https://libretranslate.com/translate';
         const content = document.getElementById('chapterContent').innerText;
         
-        fetch(apiUrl, {
-            method: 'POST',
-            body: JSON.stringify({
-                q: content,
-                source: 'en',
-                target: targetLang
-            }),
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => response.json()).then(data => {
-            document.getElementById('chapterContent').innerText = data.translatedText;
-        }).catch(error => {
-            console.error('Error:', error);
-        });
-        currentLanguage = targetLang;
+        if(content) {  // Verificar si el contenido existe antes de traducir
+            fetch(apiUrl, {
+                method: 'POST',
+                body: JSON.stringify({
+                    q: content,
+                    source: 'en',
+                    target: targetLang
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(response => response.json()).then(data => {
+                document.getElementById('chapterContent').innerText = data.translatedText;
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+            currentLanguage = targetLang;
+        }
     }
 
     function toggleMute() {
